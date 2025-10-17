@@ -1,62 +1,21 @@
-export function getTemplate({
-  redirectPath,
-  withError
-}: {
-  redirectPath: string;
-  withError: boolean;
-}): string {
+export function getTemplate({ withError }: { withError: boolean }) {
   return `
-  <!doctype html>
-  <html lang="en" data-theme="dark">
-
+  <!DOCTYPE html>
+  <html>
     <head>
-      <meta charset="utf-8">
+      <title>登录 Solara</title>
       <meta name="viewport" content="width=device-width, initial-scale=1">
-      <title>Password Protected Site</title>
-      <meta name="description" content="This site is password protected.">
-      <link rel="shortcut icon" href="https://picocss.com/favicon.ico">
-
-      <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css">
-
-      <style>
-        body > main {
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          min-height: calc(100vh - 7rem);
-          padding: 1rem 0;
-          max-width: 600px;
-          margin: 0 auto;
-        }
-
-        .error {
-          background: white;
-          border-radius: 10px;
-          color: var(--del-color);
-          padding: 0.5em 1em;
-        }
-
-        h2 { color: var(--color-h2); }
-      </style>
+      <style>body { margin: 0; padding: 20px; }</style>
     </head>
-
-    <body>
-      <main>
-        <article>
-          <hgroup>
-            <h1>Password</h1>
-            <h2>Please enter your password for this site.</h2>
-          </hgroup>
-          ${withError ? `<p class="error">Incorrect password, please try again.</p>` : ''}
-          <form method="post" action="/cfp_login">
-            <input type="hidden" name="redirect" value="${redirectPath}" />
-            <input type="password" name="password" placeholder="Password" aria-label="Password" autocomplete="current-password" required autofocus>
-            <button type="submit" class="contrast">Login</button>
-          </form>
-        </article>
-      </main>
+    <body style="text-align:center; font-family:Arial; background: linear-gradient(to bottom, #f0f8ff, #00ff88);">
+      <h1>🎵 Solara 音乐播放器</h1>
+      <form action="/cfp_login" method="post">
+        <input type="password" name="password" placeholder="输入密码" style="padding:10px; font-size:16px; border:1px solid #ccc; border-radius:5px;">
+        <br><br>
+        <button type="submit" style="padding:10px 20px; background:#00ff88; color:black; border:none; border-radius:5px; font-size:16px; cursor:pointer;">开门进音乐世界！</button>
+        ${withError ? '<p style="color:red; margin-top:10px;">哎呀，密码不对，再试试</p>' : ''}
+      </form>
     </body>
-
   </html>
   `;
 }
